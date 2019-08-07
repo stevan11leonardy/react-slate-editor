@@ -1,33 +1,155 @@
-.App {
-  text-align: center;
+
+.editor-container {
+  min-height: 500px;
+  margin: 20px auto;
+  border: 1px solid rgba(0, 0, 0, 0.192);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+/* toolbar */
+
+.editor-toolbar-container {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 0 0.8rem 0 0.8rem;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.2rem;
+  width: 100%;
+  border-bottom: 1.7px solid rgba(199, 198, 255, 0.15);
+}
+
+.editor-toolbar-button {
+  background-color: white;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 1px;
+}
+
+.editor-toolbar-button:disabled {
   pointer-events: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.editor-toolbar-button:hover {
+  background-color: rgb(247, 238, 238);
+}
+
+.active-btn {
+  color: rgb(97, 97, 253);
+}
+
+/* dialog */
+
+.input-link-dialog {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.input-link-dialog-overlay {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  background: black;
+  z-index: -1;
+}
+
+.input-link-dialog-container {
+  position: relative;
+  width: 35%;
+  height: 20%;
+  margin-top: 10%;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.336), 2px 1px 4px rgba(0, 0, 0, 0.178);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.input-link-dialog-container p {
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.input-link-dialog-container input[type='submit'] {
+  background: rgb(89, 89, 250);
+  outline: none;
+  border: none;
+  padding: 8px 13px;
   color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: auto 0 0 auto
 }
 
-.App-link {
-  color: #61dafb;
+.input-link-dialog-container input[type='submit']:hover {
+  background: rgb(109, 109, 255);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.input-link-dialog-container .input-link-dialog-input {
+  padding: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.281);
+}
+
+.input-link-dialog-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.input-link-dialog-button {
+  background-color: white;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 0 0 auto;
+}
+
+.input-link-dialog-button:hover {
+  color: red;
+}
+
+@media (max-width: 480px) {
+  .input-link-dialog-container {
+    width: 90%;
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+
+/* content */
+
+.editor-content {
+  padding: 1rem;
+}
+
+.editor-content p {
+  margin: 5px;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  max-height: 20em;
 }

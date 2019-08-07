@@ -1,0 +1,28 @@
+{
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "plugins": [
+    "@babel/syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "inline-json-import",
+    ["asset-loader", {
+      "name": "[name].[ext]",
+      "extensions": ["jpg", "png", "gif", "jpeg"],
+      "outputPath": "build/asset/images" ,
+    }],
+    ["asset-loader", {
+      "name": "[name].[ext]",
+      "extensions": ["svg"],
+      "outputPath": "build/asset/svg" 
+    }, "svg"],
+    "transform-import-styles"
+  ],
+  "env": {
+    "development": {
+      "presets": [["@babel/preset-react", { "development": true }]]
+    }
+  },
+  "ignore": [
+      "**/*.test.js",
+      "**/*.spec.js"
+  ]
+}
