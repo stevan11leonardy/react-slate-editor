@@ -23,6 +23,7 @@ import InsertImages from 'slate-drop-or-paste-images';
 import { x } from 'react-icons-kit/feather/x';
 import Toolbar from './Component/Toolbar';
 import uploadImg from './utils/action';
+import initialMockUpData from './utils/initialValue.json';
 
 const plugins = [
   List({
@@ -241,11 +242,14 @@ function renderEditor(props, editor, next) {
   }
 
   function checkForAvailability(type) {
-    return toolbar.some(e => e === type);
+    if (toolbar === undefined) {
+      return false;
+    }
+    return !toolbar.some(e => e === type);
   }
 
   return (
-    <div>
+    <>
       <Toolbar>
         <>
           <button
@@ -260,6 +264,7 @@ function renderEditor(props, editor, next) {
             className={(hasItalic()) ? 'editor-toolbar-button active-btn' : 'editor-toolbar-button'}
             onPointerDown={event => onMarkClick(event, 'italic')}
             title='Italic'
+            hidden={checkForAvailability('italic')}
           >
             <Icon icon={italic}/>
           </button>
@@ -267,6 +272,7 @@ function renderEditor(props, editor, next) {
             className={(hasUnderline()) ? 'editor-toolbar-button active-btn' : 'editor-toolbar-button'}
             onPointerDown={event => onMarkClick(event, 'underline')}
             title='Underline'
+            hidden={checkForAvailability('underline')}
           >
             <Icon icon={underline}/>
           </button>
@@ -274,10 +280,15 @@ function renderEditor(props, editor, next) {
             className={(hasCode()) ? 'editor-toolbar-button active-btn' : 'editor-toolbar-button'}
             onPointerDown={event => onMarkClick(event, 'code')}
             title='Code'
+            hidden={checkForAvailability('code')}
           >
             <Icon icon={codeIcon}/>
           </button>
-          <select onChange={onFontSizeSelect} value={checkSelectedFontSize()}>
+          <select
+            onChange={onFontSizeSelect}
+            value={checkSelectedFontSize()}
+            hidden={checkForAvailability('fontSize')}
+          >
             <option value='normal'>Normal</option>
             <option value='xx-small'>xx-Small</option>
             <option value='x-small'>x-Small</option>
@@ -291,6 +302,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onFontSizeClick(event)}
             title='Increase Font Size'
             value={2}
+            hidden={checkForAvailability('sizeUp')}
           >
             <Icon icon={font_size_up}/>
           </button>
@@ -299,6 +311,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onFontSizeClick(event)}
             title='Decrease Font Size'
             value={-2}
+            hidden={checkForAvailability('sizeDown')}
           >
             <Icon icon={font_size_down}/>
           </button>
@@ -306,6 +319,7 @@ function renderEditor(props, editor, next) {
             className='editor-toolbar-button'
             onPointerDown={event => onMarkClick(event, 'unordered-list')}
             title='Unordered List'
+            hidden={checkForAvailability('unorderedList')}
           >
             <Icon icon={list}/>
           </button>
@@ -313,6 +327,7 @@ function renderEditor(props, editor, next) {
             className='editor-toolbar-button'
             onPointerDown={event => onMarkClick(event, 'ordered-list')}
             title='Ordered List'
+            hidden={checkForAvailability('orderedList')}
           >
             <Icon icon={ic_format_list_numbered}/>
           </button>
@@ -320,6 +335,7 @@ function renderEditor(props, editor, next) {
             className={(hasLinks()) ? 'editor-toolbar-button active-btn' : 'editor-toolbar-button'}
             onPointerDown={event => onMarkClick(event, 'link')}
             title='Link'
+            hidden={checkForAvailability('link')}
           >
             <Icon icon={link}/>
           </button>
@@ -327,6 +343,7 @@ function renderEditor(props, editor, next) {
             className='editor-toolbar-button'
             onPointerDown={() => toggleAlignment('left')}
             title='Align Left'
+            hidden={checkForAvailability('alignment')}
           >
             <Icon icon={alignLeft}/>
           </button>
@@ -334,6 +351,7 @@ function renderEditor(props, editor, next) {
             className='editor-toolbar-button'
             onPointerDown={() => toggleAlignment('center')}
             title='Align Center'
+            hidden={checkForAvailability('alignment')}
           >
             <Icon icon={alignCenter}/>
           </button>
@@ -341,6 +359,7 @@ function renderEditor(props, editor, next) {
             className='editor-toolbar-button'
             onPointerDown={() => toggleAlignment('right')}
             title='Align Right'
+            hidden={checkForAvailability('alignment')}
           >
             <Icon icon={alignRight}/>
           </button>
@@ -348,6 +367,7 @@ function renderEditor(props, editor, next) {
             className='editor-toolbar-button'
             onPointerDown={() => toggleAlignment('justify')}
             title='Align Justify'
+            hidden={checkForAvailability('alignment')}
           >
             <Icon icon={alignJustify}/>
           </button>
@@ -356,6 +376,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={handleUploadImage}
             disabled={hasImages()}
             title='Add Image'
+            hidden={checkForAvailability('image')}
           >
             <Icon icon={image}/>
           </button>
@@ -386,7 +407,7 @@ function renderEditor(props, editor, next) {
         </div>
       }
       {children}
-    </div>
+    </>
   );
 }
 
@@ -430,7 +451,7 @@ function App(props) {
   const {
     initialValue,
   } = props;
-  const [editorData, setEditorData] = useState(Value.fromJSON(initialValue));
+  const [editorData, setEditorData] = useState(Value.fromJSON(initialValue || initialMockUpData));
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
 
   function onEditorChange({ value }) {
@@ -574,6 +595,7 @@ function App(props) {
         schema={schema}
         openLinkDialog={openLinkDialog}
         setOpenLinkDialog={setOpenLinkDialog}
+        placeholder='Type here...'
         {...props}
       />
     </div>
