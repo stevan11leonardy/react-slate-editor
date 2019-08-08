@@ -449,14 +449,9 @@ const schema = {
 
 function App(props) {
   const {
-    initialValue,
+    initialValue, onChange,
   } = props;
-  const [editorData, setEditorData] = useState(Value.fromJSON(initialValue || initialMockUpData));
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
-
-  function onEditorChange({ value }) {
-    setEditorData(value);
-  }
 
   function onEditorKeyDown(event, editor, next) {
     if (event.ctrlKey) {
@@ -583,8 +578,8 @@ function App(props) {
   return (
     <div className="editor-container">
       <Editor
-        value={editorData}
-        onChange={onEditorChange}
+        value={Value.fromJSON(initialValue || initialMockUpData)}
+        onChange={onChange}
         onKeyDown={onEditorKeyDown}
         className='editor-content'
         renderBlock={handleRenderBlock}
@@ -609,6 +604,7 @@ App.propTypes = {
   children: PropTypes.object,
   isFocused: PropTypes.bool,
   initialValue: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default App;
