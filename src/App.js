@@ -237,7 +237,7 @@ function renderEditor(props, editor, next) {
 
   function handleSubmitDialogLink(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(document.getElementById('link-dialog-form'));
     addLink(editor, formData.get('url-link'));
   }
 
@@ -399,7 +399,7 @@ function renderEditor(props, editor, next) {
       {openLinkDialog
       && <div className='input-link-dialog'>
           <div className='input-link-dialog-overlay'>&nbsp;</div>
-          <form onSubmit={handleSubmitDialogLink} className='input-link-dialog-container' >
+          <form className='input-link-dialog-container' id='link-dialog-form' >
             <section className='input-link-dialog-header'>
               <p>Insert Your Link:</p>
               <button
@@ -416,7 +416,7 @@ function renderEditor(props, editor, next) {
               placeholder='https://www.yourdomain.com'
               required
             />
-            <input type='submit' value='Save'/>
+            <input type='submit' value='Save' onClick={handleSubmitDialogLink}/>
           </form>
         </div>
       }
