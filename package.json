@@ -1,6 +1,7 @@
 {
   "name": "react-slate-editor",
   "version": "0.1.0-beta-4",
+  "description": "A rich editor based on slate framework",
   "main": "build/App.js",
   "dependencies": {
     "@convertkit/slate-lists": "^0.2.4",
