@@ -1,6 +1,6 @@
 {
   "name": "react-slate-editor",
-  "version": "0.1.0-beta-5",
+  "version": "0.1.0-beta-6",
   "description": "A rich editor based on slate framework",
   "main": "build/App.js",
   "dependencies": {
