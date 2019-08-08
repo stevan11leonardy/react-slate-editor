@@ -449,9 +449,13 @@ const schema = {
 
 function App(props) {
   const {
-    initialValue,
+    initialValue, onEditorChange,
   } = props;
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
+
+  function handleOnChange({ value }) {
+    onEditorChange(value);
+  }
 
   function onEditorKeyDown(event, editor, next) {
     if (event.ctrlKey) {
@@ -590,6 +594,7 @@ function App(props) {
         openLinkDialog={openLinkDialog}
         setOpenLinkDialog={setOpenLinkDialog}
         placeholder='Type here...'
+        onChange={handleOnChange}
         {...props}
       />
     </div>
@@ -603,6 +608,7 @@ App.propTypes = {
   children: PropTypes.object,
   isFocused: PropTypes.bool,
   initialValue: PropTypes.object.isRequired,
+  onEditorChange: PropTypes.func.isRequired,
 };
 
 export default App;

@@ -32,7 +32,7 @@ function App() {
   return (
     <Editor
       initialValue={editorData}
-      onChange={onEditorChange}
+      onEditorChange={onEditorChange}
       toolbar={toolbar} //customize your toolbar
       uploadServerLink={'https://whereyouuploadit.com'} // add your upload api link here
       accessToken={'add your server token'} // give me some access please
