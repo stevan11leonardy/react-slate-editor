@@ -567,13 +567,13 @@ function App(props) {
     editor.focus();
     switch (prop.mark.type) {
       case 'bold':
-        return <BoldMark {...props} />;
+        return <BoldMark {...prop} />;
       case 'italic':
-        return <ItalicMark {...props} />;
+        return <ItalicMark {...prop} />;
       case 'underline':
-        return <UnderlineMark {...props} />;
+        return <UnderlineMark {...prop} />;
       case 'code':
-        return <CodeNode {...props} />;
+        return <CodeNode {...prop} />;
       default:
         return next();
     }
