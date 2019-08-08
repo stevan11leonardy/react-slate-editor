@@ -6,7 +6,7 @@ A rich text editor based on [SlateJS](https://github.com/ianstormtaylor/slate) f
 
 [![version](https://img.shields.io/github/package-json/v/stevan11leonardy/react-slate-editor?color=green)](https://www.npmjs.com/package/react-slate-editor)
 [![npm downloads](https://img.shields.io/npm/dt/react-slate-editor?color=green)](https://www.npmjs.com/package/react-slate-editor)
-[![Licence](https://img.shields.io/npm/l/react-slate-editor?color=green)](https://github.com/stevan11leonardy/react-slate-editor/blob/master/LICENSE)
+[![Licence](https://img.shields.io/npm/l/react-slate-editor?color=green&label=license)](https://github.com/stevan11leonardy/react-slate-editor/blob/master/LICENSE)
 
 </div>
 
