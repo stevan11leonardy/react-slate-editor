@@ -25,7 +25,7 @@ const toolbar = ['bold', 'italic', 'underline', 'code', 'fontSize', 'sizeUp', 's
 function App() {
   const [editorData, setEditorData] = useState(null); // if there is no object value in slate pass null or undefined
 
-  function onEditorChange({ value }) { // function for set your state or post to your api
+  function onEditorChange(value) { // function for set your state or post to your api
     setEditorData(value);
   }
 
