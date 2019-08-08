@@ -492,7 +492,7 @@ function App(props) {
   const [editorData, setEditorData] = useState(html.deserialize(initialValue));
 
   useEffect(() => {
-    if (reinitialize) setEditorData(html.deserialize('<p></p>'));
+    setEditorData(html.deserialize('<p></p>'));
   }, [reinitialize]);
 
   function handleOnChange({ value }) {
