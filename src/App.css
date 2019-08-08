@@ -1,6 +1,7 @@
 
 .editor-container {
   min-height: 500px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.192);

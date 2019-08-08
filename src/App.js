@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Editor } from 'slate-react';
 import { Block } from 'slate';
@@ -486,10 +486,14 @@ const schema = {
 
 function App(props) {
   const {
-    initialValue, onEditorChange,
+    initialValue, onEditorChange, reinitialize,
   } = props;
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
   const [editorData, setEditorData] = useState(html.deserialize(initialValue));
+
+  useEffect(() => {
+    if (reinitialize) setEditorData(html.deserialize('<p></p>'));
+  }, [reinitialize]);
 
   function handleOnChange({ value }) {
     onEditorChange(html.serialize(value));
@@ -646,6 +650,7 @@ App.propTypes = {
   isFocused: PropTypes.bool,
   initialValue: PropTypes.string.isRequired,
   onEditorChange: PropTypes.func.isRequired,
+  reinitialize: PropTypes.bool,
 };
 
 export default App;
