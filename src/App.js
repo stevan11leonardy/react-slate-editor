@@ -257,6 +257,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'bold')}
             title='Bold'
             hidden={checkForAvailability('bold')}
+            type='button'
           >
             <Icon icon={bold}/>
           </button>
@@ -265,6 +266,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'italic')}
             title='Italic'
             hidden={checkForAvailability('italic')}
+            type='button'
           >
             <Icon icon={italic}/>
           </button>
@@ -273,6 +275,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'underline')}
             title='Underline'
             hidden={checkForAvailability('underline')}
+            type='button'
           >
             <Icon icon={underline}/>
           </button>
@@ -281,6 +284,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'code')}
             title='Code'
             hidden={checkForAvailability('code')}
+            type='button'
           >
             <Icon icon={codeIcon}/>
           </button>
@@ -303,6 +307,7 @@ function renderEditor(props, editor, next) {
             title='Increase Font Size'
             value={2}
             hidden={checkForAvailability('sizeUp')}
+            type='button'
           >
             <Icon icon={font_size_up}/>
           </button>
@@ -312,6 +317,7 @@ function renderEditor(props, editor, next) {
             title='Decrease Font Size'
             value={-2}
             hidden={checkForAvailability('sizeDown')}
+            type='button'
           >
             <Icon icon={font_size_down}/>
           </button>
@@ -320,6 +326,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'unordered-list')}
             title='Unordered List'
             hidden={checkForAvailability('unorderedList')}
+            type='button'
           >
             <Icon icon={list}/>
           </button>
@@ -328,6 +335,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'ordered-list')}
             title='Ordered List'
             hidden={checkForAvailability('orderedList')}
+            type='button'
           >
             <Icon icon={ic_format_list_numbered}/>
           </button>
@@ -336,6 +344,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={event => onMarkClick(event, 'link')}
             title='Link'
             hidden={checkForAvailability('link')}
+            type='button'
           >
             <Icon icon={link}/>
           </button>
@@ -344,6 +353,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={() => toggleAlignment('left')}
             title='Align Left'
             hidden={checkForAvailability('alignment')}
+            type='button'
           >
             <Icon icon={alignLeft}/>
           </button>
@@ -352,6 +362,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={() => toggleAlignment('center')}
             title='Align Center'
             hidden={checkForAvailability('alignment')}
+            type='button'
           >
             <Icon icon={alignCenter}/>
           </button>
@@ -360,6 +371,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={() => toggleAlignment('right')}
             title='Align Right'
             hidden={checkForAvailability('alignment')}
+            type='button'
           >
             <Icon icon={alignRight}/>
           </button>
@@ -368,6 +380,7 @@ function renderEditor(props, editor, next) {
             onPointerDown={() => toggleAlignment('justify')}
             title='Align Justify'
             hidden={checkForAvailability('alignment')}
+            type='button'
           >
             <Icon icon={alignJustify}/>
           </button>
@@ -377,6 +390,7 @@ function renderEditor(props, editor, next) {
             disabled={hasImages()}
             title='Add Image'
             hidden={checkForAvailability('image')}
+            type='button'
           >
             <Icon icon={image}/>
           </button>
