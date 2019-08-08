@@ -492,8 +492,10 @@ function App(props) {
   const [editorData, setEditorData] = useState(html.deserialize(initialValue));
 
   useEffect(() => {
-    setEditorData(html.deserialize('<p></p>'));
-  }, [reinitialize]);
+    if (reinitialize) {
+      setEditorData(html.deserialize('<p></p>'));
+    }
+  }, [initialValue]);
 
   function handleOnChange({ value }) {
     onEditorChange(html.serialize(value));
