@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Editor } from 'slate-react';
-import { Value, Block } from 'slate';
+import { Block } from 'slate';
+import Html from 'slate-html-serializer';
 import './App.css';
 import Icon from 'react-icons-kit';
 import { font_size_up } from 'react-icons-kit/ikons/font_size_up';
@@ -18,12 +19,14 @@ import { alignRight } from 'react-icons-kit/feather/alignRight';
 import { alignJustify } from 'react-icons-kit/feather/alignJustify';
 import { image } from 'react-icons-kit/feather/image';
 import { ic_format_list_numbered } from 'react-icons-kit/md/ic_format_list_numbered';
+import { x } from 'react-icons-kit/feather/x';
 import List from '@convertkit/slate-lists';
 import InsertImages from 'slate-drop-or-paste-images';
-import { x } from 'react-icons-kit/feather/x';
 import Toolbar from './Component/Toolbar';
 import uploadImg from './utils/action';
-import initialMockUpData from './utils/initialValue.json';
+import rules from './utils/serializeHtmlRules';
+
+const html = new Html({ rules });
 
 const plugins = [
   List({
@@ -168,7 +171,7 @@ function renderEditor(props, editor, next) {
     editor.setBlocks({
       type: 'paragraph',
       data: {
-        alignment: value,
+        className: `text-${value}`,
       },
     });
   }
@@ -197,12 +200,28 @@ function renderEditor(props, editor, next) {
   }
 
   function onFontSizeSelect(event) {
-    editor.wrapInline({
-      type: 'span-select',
-      data: {
-        fontSize: event.target.value,
-      },
-    });
+    let currentKey = null;
+    editor.value.inlines.map((e) => { currentKey = e.key; return currentKey; });
+    const fontSize = document.getElementById(`size-${currentKey}`);
+    if (fontSize === null) {
+      editor.wrapInline({
+        type: 'span-select',
+        data: {
+          style: {
+            fontSize: event.target.value,
+          },
+        },
+      });
+    } else {
+      editor.setInlines({
+        type: 'span-select',
+        data: {
+          style: {
+            fontSize: event.target.value,
+          },
+        },
+      });
+    }
   }
 
   function onFontSizeClick(event) {
@@ -214,7 +233,9 @@ function renderEditor(props, editor, next) {
       editor.wrapInline({
         type: 'span-click',
         data: {
-          fontSize,
+          style: {
+            fontSize,
+          },
         },
       });
     } else {
@@ -223,7 +244,9 @@ function renderEditor(props, editor, next) {
       editor.setInlines({
         type: 'span-click',
         data: {
-          fontSize,
+          style: {
+            fontSize,
+          },
         },
       });
     }
@@ -302,7 +325,7 @@ function renderEditor(props, editor, next) {
             <option value='xx-large'>xx-Large</option>
           </select>
           <button
-            className={(hasCode()) ? 'editor-toolbar-button active-btn' : 'editor-toolbar-button'}
+            className={'editor-toolbar-button'}
             onPointerDown={event => onFontSizeClick(event)}
             title='Increase Font Size'
             value={2}
@@ -312,7 +335,7 @@ function renderEditor(props, editor, next) {
             <Icon icon={font_size_up}/>
           </button>
           <button
-            className={(hasCode()) ? 'editor-toolbar-button active-btn' : 'editor-toolbar-button'}
+            className={'editor-toolbar-button'}
             onPointerDown={event => onFontSizeClick(event)}
             title='Decrease Font Size'
             value={-2}
@@ -466,9 +489,11 @@ function App(props) {
     initialValue, onEditorChange,
   } = props;
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
+  const [editorData, setEditorData] = useState(html.deserialize(initialValue));
 
   function handleOnChange({ value }) {
-    onEditorChange(value);
+    onEditorChange(html.serialize(value));
+    setEditorData(value);
   }
 
   function onEditorKeyDown(event, editor, next) {
@@ -508,13 +533,11 @@ function App(props) {
       attributes, children, node,
     } = prop;
     switch (node.type) {
-      case 'code':
-        return <CodeNode {...prop} />;
       case 'paragraph': {
-        const textAlign = node.data.get('alignment') || 'left';
+        const className = node.data.get('className');
         return (
           <div {...attributes} style={{ position: 'relative' }}>
-            <p {...attributes} style={{ textAlign }}>
+            <p {...attributes} className={className}>
               {children}
             </p>
           </div>
@@ -557,17 +580,17 @@ function App(props) {
         );
       }
       case 'span-select': {
-        const fontSize = node.data.get('fontSize');
+        const style = node.data.get('style');
         return (
-          <span {...attributes} style={{ fontSize }}>
+          <span {...attributes} style={style} id={`size-${node.key}`}>
             {children}
           </span>
         );
       }
       case 'span-click': {
-        const fontSize = Number(node.data.get('fontSize'));
+        const style = node.data.get('style');
         return (
-          <span {...attributes} style={{ fontSize }} id={`size-${node.key}`}>
+          <span {...attributes} style={style} id={`size-${node.key}`}>
             {children}
           </span>
         );
@@ -596,7 +619,7 @@ function App(props) {
   return (
     <div className="editor-container">
       <Editor
-        value={Value.fromJSON(initialValue || initialMockUpData)}
+        value={editorData}
         onKeyDown={onEditorKeyDown}
         className='editor-content'
         renderBlock={handleRenderBlock}
@@ -621,7 +644,7 @@ App.propTypes = {
   attributes: PropTypes.object,
   children: PropTypes.object,
   isFocused: PropTypes.bool,
-  initialValue: PropTypes.object.isRequired,
+  initialValue: PropTypes.string.isRequired,
   onEditorChange: PropTypes.func.isRequired,
 };
 
