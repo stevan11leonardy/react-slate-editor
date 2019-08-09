@@ -56,5 +56,12 @@
     "url": "https://github.com/stevan11leonardy/react-slate-editor"
   },
   "author": "Stevan Leonardy",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "slate",
+    "rich-text",
+    "editor",
+    "customizeable"
+  ]
 }
