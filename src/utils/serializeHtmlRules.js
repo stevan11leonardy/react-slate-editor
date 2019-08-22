@@ -6,6 +6,9 @@ const BLOCK_TAGS = {
   blockquote: 'quote',
   p: 'paragraph',
   pre: 'code',
+  ol: 'ordered-list',
+  ul: 'unordered-list',
+  li: 'list-item',
 };
 
 const INLINE_TAGS = {
@@ -49,6 +52,14 @@ const rules = [
             return <p className={obj.data.get('className')}>{children}</p>;
           case 'quote':
             return <blockquote>{children}</blockquote>;
+          case 'unordered-list':
+            return <ul>{children}</ul>;
+          case 'ordered-list':
+            return <ol>{children}</ol>;
+          case 'list-item':
+            return <li>{children}</li>;
+          case 'list-item-child':
+            return <div>{children}</div>;
           default:
             return null;
         }
