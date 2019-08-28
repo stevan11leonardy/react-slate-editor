@@ -9,6 +9,7 @@ const BLOCK_TAGS = {
   ol: 'ordered-list',
   ul: 'unordered-list',
   li: 'list-item',
+  span: 'list-item-child',
 };
 
 const INLINE_TAGS = {
@@ -59,7 +60,7 @@ const rules = [
           case 'list-item':
             return <li>{children}</li>;
           case 'list-item-child':
-            return <div>{children}</div>;
+            return <span>{children}</span>;
           default:
             return null;
         }

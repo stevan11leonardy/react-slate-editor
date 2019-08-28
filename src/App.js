@@ -610,6 +610,13 @@ function App(props) {
           </span>
         );
       }
+      case 'span': {
+        return (
+          <span {...attributes}>
+            {children}
+          </span>
+        );
+      }
       default:
         return next();
     }
