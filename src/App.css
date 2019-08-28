@@ -152,6 +152,14 @@
   color: red;
 }
 
+.input-link-dialog-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0;
+  font-size: 0.8em;
+}
+
 @media (max-width: 480px) {
   .input-link-dialog-container {
     width: 90%;

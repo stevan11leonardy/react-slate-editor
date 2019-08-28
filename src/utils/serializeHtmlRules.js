@@ -107,6 +107,7 @@ const rules = [
             style: (style !== undefined && style !== null) ? transform(style) : undefined,
             src: el.getAttribute('src'),
             href: el.getAttribute('href'),
+            target: el.getAttribute('target'),
           },
           nodes: next(el.childNodes),
         };
@@ -122,7 +123,7 @@ const rules = [
           case 'image':
             return <img src={obj.data.get('src')} alt='img'/>;
           case 'link':
-            return <a href={obj.data.get('href')}>{children}</a>;
+            return <a href={obj.data.get('href')} target={obj.data.get('target')}>{children}</a>;
           default:
             return null;
         }

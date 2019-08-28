@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 function Main() {
-  const [initialState, setInitialState] = useState('<ol><li><div>sdsdsdsd</div></li><li><div>sdsdsd</div></li><li><div>sds</div></li><li><div><strong>dsdsdsd</strong></div></li></ol>');
+  const [initialState, setInitialState] = useState('<p></p>');
 
   function onEditorChange(value) {
     return value;

@@ -101,11 +101,12 @@ LinkMark.propTypes = {
   text: PropTypes.string,
 };
 
-function addLink(editor, url) {
+function addLink(editor, submittion) {
   editor.wrapInline({
     type: 'link',
     data: {
-      href: url,
+      href: submittion.url,
+      target: (submittion.target) ? '_blank' : '_self',
     },
   });
   editor.moveToEnd();
@@ -261,7 +262,11 @@ function renderEditor(props, editor, next) {
   function handleSubmitDialogLink(event) {
     event.preventDefault();
     const formData = new FormData(document.getElementById('link-dialog-form'));
-    addLink(editor, formData.get('url-link'));
+    const submittion = {
+      url: formData.get('url-link'),
+      target: formData.get('open-new-tab'),
+    };
+    addLink(editor, submittion);
   }
 
   function checkForAvailability(type) {
@@ -439,6 +444,10 @@ function renderEditor(props, editor, next) {
               placeholder='https://www.yourdomain.com'
               required
             />
+            <div className='input-link-dialog-checkbox'>
+              <input type='checkbox' name='open-new-tab' id='open-tab'/>
+              <label htmlFor='open-tab'>open link in new tab</label>
+            </div>
             <input type='submit' value='Save' onClick={handleSubmitDialogLink}/>
           </form>
         </div>
