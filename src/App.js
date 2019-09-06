@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Editor } from 'slate-react';
 import { Block } from 'slate';
@@ -115,6 +116,44 @@ function addLink(editor, submittion) {
 function removeLink(editor) {
   editor.unwrapInline('link');
 }
+
+function LinkDialog(props) {
+  const { setOpenLinkDialog, handleSubmitDialogLink } = props;
+  return (
+    <div className='input-link-dialog'>
+      <div className='input-link-dialog-overlay'>&nbsp;</div>
+      <form className='input-link-dialog-container' id='link-dialog-form' >
+        <section className='input-link-dialog-header'>
+          <p>Insert Your Link:</p>
+          <button
+            type="button"
+            className='input-link-dialog-button'
+            onPointerDown={() => setOpenLinkDialog(false)}
+          >
+            <Icon icon={x}/>
+          </button>
+        </section>
+        <input
+          type='url'
+          name='url-link'
+          className='input-link-dialog-input'
+          placeholder='https://www.yourdomain.com'
+          required
+        />
+        <div className='input-link-dialog-checkbox'>
+          <input type='checkbox' name='open-new-tab' id='open-tab'/>
+          <label htmlFor='open-tab'>open link in new tab</label>
+        </div>
+        <input type='submit' value='Save' onClick={handleSubmitDialogLink}/>
+      </form>
+    </div>
+  );
+}
+
+LinkDialog.propTypes = {
+  setOpenLinkDialog: PropTypes.func.isRequired,
+  handleSubmitDialogLink: PropTypes.func.isRequired,
+};
 
 function renderEditor(props, editor, next) {
   const { uploadServerLink, accessToken, toolbar } = props;
@@ -276,6 +315,27 @@ function renderEditor(props, editor, next) {
     return !toolbar.some(e => e === type);
   }
 
+  function RenderDialog() {
+    if (openLinkDialog) {
+      if (document.getElementById('Link-Dialog') === null) {
+        const newDiv = document.createElement('div');
+        newDiv.id = 'Link-Dialog';
+        document.body.appendChild(newDiv);
+        ReactDOM.render(
+          <LinkDialog
+            open={openLinkDialog}
+            handleSubmitDialogLink={handleSubmitDialogLink}
+            setOpenLinkDialog={setOpenLinkDialog}
+          />, document.getElementById('Link-Dialog'),
+        );
+      }
+    } else if (document.getElementById('Link-Dialog') !== null) {
+      document.body.removeChild(document.getElementById('Link-Dialog'));
+    }
+    return null;
+  }
+
+
   return (
     <>
       <Toolbar>
@@ -424,34 +484,7 @@ function renderEditor(props, editor, next) {
           </button>
         </>
       </Toolbar>
-      {openLinkDialog
-      && <div className='input-link-dialog'>
-          <div className='input-link-dialog-overlay'>&nbsp;</div>
-          <form className='input-link-dialog-container' id='link-dialog-form' >
-            <section className='input-link-dialog-header'>
-              <p>Insert Your Link:</p>
-              <button
-                className='input-link-dialog-button'
-                onPointerDown={() => setOpenLinkDialog(false)}
-              >
-                <Icon icon={x}/>
-              </button>
-            </section>
-            <input
-              type='url'
-              name='url-link'
-              className='input-link-dialog-input'
-              placeholder='https://www.yourdomain.com'
-              required
-            />
-            <div className='input-link-dialog-checkbox'>
-              <input type='checkbox' name='open-new-tab' id='open-tab'/>
-              <label htmlFor='open-tab'>open link in new tab</label>
-            </div>
-            <input type='submit' value='Save' onClick={handleSubmitDialogLink}/>
-          </form>
-        </div>
-      }
+      <RenderDialog/>
       {children}
     </>
   );
