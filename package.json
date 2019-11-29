@@ -1,22 +1,11 @@
 {
   "name": "react-slate-editor",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A rich editor based on slate framework",
   "main": "build/App.js",
-  "dependencies": {
-    "@convertkit/slate-lists": "^0.2.4",
-    "axios": "^0.19.0",
-    "css": "^2.2.4",
-    "immutable": "^4.0.0-rc.12",
-    "prop-types": "^15.7.2",
+  "peerDependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-icons-kit": "^1.3.1",
-    "react-scripts": "^2.1.8",
-    "slate": "^0.47.4",
-    "slate-drop-or-paste-images": "^0.9.1",
-    "slate-html-serializer": "^0.8.6",
-    "slate-react": "^0.22.4"
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,13 +32,30 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
-    "eslint": "^5.12.0",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-config-react-app": "^4.0.1",
-    "eslint-plugin-react": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@convertkit/slate-lists": "^0.2.4",
+    "axios": "^0.19.0",
     "babel-plugin-asset-loader": "^0.1.3",
     "babel-plugin-inline-json-import": "^0.3.2",
-    "babel-plugin-transform-import-styles": "0.0.11"
+    "babel-plugin-transform-import-styles": "0.0.11",
+    "babel-preset-minify": "^0.5.1",
+    "css": "^2.2.4",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.14.3",
+    "immutable": "^4.0.0-rc.12",
+    "prop-types": "^15.7.2",
+    "react-icons-kit": "^1.3.1",
+    "react-scripts": "^2.1.8",
+    "slate": "^0.47.4",
+    "slate-drop-or-paste-images": "^0.9.1",
+    "slate-html-serializer": "^0.8.6",
+    "slate-react": "^0.22.4"
   },
   "repository": {
     "type": "git",
