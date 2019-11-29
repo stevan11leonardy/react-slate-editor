@@ -2,10 +2,10 @@
   "parser": "babel-eslint",
   "extends": [
     "airbnb-base",
-    "plugin:react/recommended",
+    "plugin:react/recommended"
   ],
   "plugins": [
-    "react",
+    "react"
   ],
   "rules": {
     "linebreak-style": [

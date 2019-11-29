@@ -1,13 +1,23 @@
 {
-  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "presets": [
+    ["minify", {"builtIns": false}],
+    "@babel/preset-react",
+    ["@babel/env", {
+      "modules": false
+    }]
+  ],
   "plugins": [
-    "@babel/syntax-dynamic-import",
+    ["@babel/transform-runtime", { "useEsModules" : true }],
+    "macros",
     "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-object-rest-spread", { "loose": true }],
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-object-assign",
     "inline-json-import",
     ["asset-loader", {
       "name": "[name].[ext]",
       "extensions": ["jpg", "png", "gif", "jpeg"],
-      "outputPath": "build/asset/images" ,
+      "outputPath": "build/asset/images" 
     }],
     ["asset-loader", {
       "name": "[name].[ext]",
@@ -23,6 +33,7 @@
   },
   "ignore": [
       "**/*.test.js",
-      "**/*.spec.js"
+      "**/*.spec.js",
+      "src/index.js"
   ]
 }

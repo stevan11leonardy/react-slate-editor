@@ -528,7 +528,7 @@ const schema = {
 
 function App(props) {
   const {
-    initialValue, onEditorChange, reinitialize,
+    initialValue, onEditorChange, reinitialize, height,
   } = props;
   const [openLinkDialog, setOpenLinkDialog] = useState(false);
   const [editorData, setEditorData] = useState(html.deserialize(initialValue));
@@ -672,7 +672,7 @@ function App(props) {
   }
 
   return (
-    <div className="editor-container">
+    <div className="editor-container" style={{ minHeight: height || 500 }}>
       <Editor
         value={editorData}
         onKeyDown={onEditorKeyDown}
@@ -702,6 +702,7 @@ App.propTypes = {
   initialValue: PropTypes.string.isRequired,
   onEditorChange: PropTypes.func.isRequired,
   reinitialize: PropTypes.bool,
+  height: PropTypes.number,
 };
 
 export default App;
