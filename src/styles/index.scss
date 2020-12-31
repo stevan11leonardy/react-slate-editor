@@ -1,0 +1,40 @@
+.rse-container {
+  display: block;
+  width: 100%;
+  background-color: white;
+  
+  .editor-container {
+    padding: .5rem;
+  }
+
+  .toolbar-container {
+    display: flex;
+
+    .toggle {
+      padding: .3rem;
+      color: rgb(211, 175, 175);
+    }
+
+    .toggle:hover {
+      background-color: whitesmoke;
+    }
+
+    .active {
+      color: black;
+    }
+
+    .separator {
+      padding: .2rem;
+    }
+
+    .popover-content-container {
+      background-color: white;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+      padding: .5rem;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+}
