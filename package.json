@@ -37,7 +37,7 @@
     "@babel/plugin-transform-object-assign": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@convertkit/slate-lists": "^0.2.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babel-plugin-asset-loader": "^0.1.3",
     "babel-plugin-inline-json-import": "^0.3.2",
     "babel-plugin-transform-import-styles": "0.0.11",
